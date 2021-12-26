@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Scrolling</title>
+    <style>
+        * {
+            font-family: 'Courier New', Courier, monospace;
+
+        }
+
+        body {
+            background: linear-gradient(to right, red, white);
+        }
+
+        #scrollDiv {
+            background: linear-gradient(#f8f8f8, red);
+            overflow: scroll;
+            height: 60vh;
+            width: 60%;
+            margin: auto;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 2px solid black;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: black;
+            text-shadow: 0px 0px 10px white;
+            font-size: 4rem;
+            text-align: center;
+        }
+
+        small {
+            position: absolute;
+            bottom: 0;
+            right: 40%;
+            color: white;
+            padding: 10px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Infinite Scrolling</h1>
+    <div id="scrollDiv">
+
+    </div>
+    <small>Made with ♥️ by Sanket Chaware</small>
+</body>
+
+</html>
+<script>
+    var arr = ["Thanos", "Captain America", "Natasha Romanoff", "Iron Man", "SpiderMan", "Doctor Strange",
+        "Clint Barton", "Hulk", "Vision", "Thor", "Black Panther"
+    ];
+    const scrollDiv = document.getElementById("scrollDiv");
+
+    const loadContent = () => {
+        for (var i = 0; i < 25; i++) {
+            let p = document.createElement("p");
+            p.innerText = arr[Math.round(Math.random() * arr.length-1)];
+            scrollDiv.appendChild(p);
+        }
+    }
+    loadContent()
+
+    scrollDiv.addEventListener("scroll", () => {
+        console.log(scrollDiv.scrollTop);
+        console.log(scrollDiv.clientHeight);
+        console.log(scrollDiv.scrollHeight);
+
+        if (scrollDiv.scrollTop + scrollDiv.clientHeight >= scrollDiv.scrollHeight) {
+            loadContent();
+        }
+    })
+</script>
